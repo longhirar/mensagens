@@ -1,0 +1,41 @@
+﻿@model List<mensagens.Models.Message>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Chat</h2>
+    
+    <!-- Chat messages display -->
+    <div class="border rounded-3 p-3 mb-4" style="height: 400px; overflow-y: auto;">
+        @if (Model != null && Model.Count > 0)
+        {
+            @foreach (var msg in Model)
+            {
+                <div class="mb-3">
+                    <div class="d-flex">
+                        <div class="me-2">
+                            <strong>@msg.Name</strong> <small class="text-muted">@msg.Email</small>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="bg-light p-2 rounded">
+                                @msg.Content
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>No messages yet.</p>
+        }
+    </div>
+
+    <!-- Message input form -->
+    <form asp-action="Index" method="post" class="d-flex">
+        <div class="input-group flex-grow-1 me-2">
+            <input type="text" id="Name" name="Name" class="form-control" placeholder="Your Name" required />
+            <input type="email" id="Email" name="Email" class="form-control" placeholder="Your Email" required />
+        </div>
+        <input type="text" id="Content" name="Content" class="form-control flex-grow-1 me-2" placeholder="Type a message" required />
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+</div>
